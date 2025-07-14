@@ -1,13 +1,21 @@
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { cn } from "@/lib/utils";
+import { CodeBlock, CodeBlockCode } from "./code-block";
+
+function extractLanguage(className?: string): string {
+  if (!className) return "plaintext"
+  const match = className.match(/language-(\w+)/)
+  return match ? match[1] : "plaintext"
+}
+
 
 const components: Components = {
   a: ({ href, children }: { href: string | undefined, children: React.ReactNode }) => {
     return <a href={href ?? ''} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-600">{children}</a>
   },
   p: ({ children }: { children: React.ReactNode }) => {
-    return <p className="">{children}</p>
+    return <p className="mb-4">{children}</p>
   },
   h1: ({ children }: { children: React.ReactNode }) => {
     return <h1 className="mt-6 mb-2 text-3xl font-semibold tracking-tight">{children}</h1>
@@ -36,15 +44,49 @@ const components: Components = {
   blockquote: ({ children }: { children: React.ReactNode }) => {
     return <blockquote className="text-sm text-muted-foreground border-l-4 border-primary/20 pl-4 py-2 bg-muted/50 rounded-md">{children}</blockquote>
   },
-  code: ({ children }: { children: React.ReactNode }) => {
-    return <code className="text-sm text-muted-foreground">{children}</code>
+  code: function CodeComponent({ className, children, ...props }) {
+    const isInline =
+      !props.node?.position?.start.line ||
+      props.node?.position?.start.line === props.node?.position?.end.line
+
+    if (isInline) {
+      return (
+        <span
+          className={cn(
+            "bg-primary-foreground text-primary rounded-sm px-1 font-mono text-sm",
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </span>
+      )
+    }
+
+    const language = extractLanguage(className)
+
+    return (
+      <CodeBlock className={cn("my-4", className)}>
+        <CodeBlockCode code={children as string} language={language} />
+      </CodeBlock>
+    )
   },
-  pre: ({ children }: { children: React.ReactNode }) => {
-    return <pre className="text-sm text-muted-foreground">{children}</pre>
+  pre: function PreComponent({ children }) {
+    return <>{children}</>
   },
   hr: () => {
     return <hr className="my-4 border-t border-primary/20" />
-  }
+  },
+  table: ({ children }: { children: React.ReactNode }) => {
+    return <table className="w-full border-collapse border border-gray-300">{children}</table>
+  },
+  th: ({ children }: { children: React.ReactNode }) => {
+    return <th className="border border-gray-300 p-2">{children}</th>
+  },
+  td: ({ children }: { children: React.ReactNode }) => {
+    return <td className="border border-gray-300 p-2">{children}</td>
+  },
+  
 }
 
 export default function Markdown({ children, className }: { children: string, className?: string }) {
