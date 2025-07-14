@@ -1,4 +1,5 @@
 import { Message } from "ai";
+import Markdown from "@/components/ui/markdown";
 
 export default function ChatMessage({ message }: { message: Message }) {
   return (
@@ -9,7 +10,7 @@ export default function ChatMessage({ message }: { message: Message }) {
         <div className="text-md">{message.content}</div>
       </div> : <div className="mr-auto bg-gray-100 p-4 rounded-2xl w-fit border border-gray-300 shadow-sm">
         <div className="text-xs text-muted-foreground">Speedy AI</div>
-        <div className="text-md">{message.content}</div>
+        <div className="text-md"><Markdown>{message.content}</Markdown></div>
       </div>
       }
     </div>
