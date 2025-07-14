@@ -9,7 +9,7 @@ export async function POST(req: Request) {
 
   const result = streamText({
     model: cerebras('llama-3.3-70b'),
-    system: 'You are a helpful assistant.',
+    system: 'You are a helpful assistant. You should write HTML/JSX code to display the information you have in a cool way. Return your code in <react></react> XML tags. I will parse them so the user can see the information.',
     messages,
   });
 
