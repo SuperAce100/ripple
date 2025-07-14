@@ -1,7 +1,9 @@
 import ReactMarkdown, { Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { cn } from "@/lib/utils";
-import { CodeBlock, CodeBlockCode } from "./code-block";
+import { CodeBlock, CodeBlockCode } from "@/components/ui/code-block";
+import { JSXPreview } from "@/components/ui/jsx-preview";
+import rehypeRaw from "rehype-raw";
 
 function extractLanguage(className?: string): string {
   if (!className) return "plaintext"
@@ -86,11 +88,9 @@ const components: Components = {
   td: ({ children }: { children: React.ReactNode }) => {
     return <td className="border border-gray-300 p-2">{children}</td>
   },
-  
 }
 
 export default function Markdown({ children, className }: { children: string, className?: string }) {
-
   return (
     <div className={cn("w-full", className)}>
       <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>{children}</ReactMarkdown>

@@ -1,5 +1,5 @@
 import { Message } from "ai";
-import Markdown from "@/components/ui/markdown";
+import GenerativeMessage from "./generative-message";
 
 export default function ChatMessage({ message }: { message: Message }) {
   return (
@@ -7,9 +7,7 @@ export default function ChatMessage({ message }: { message: Message }) {
       { message.role === 'user' ? 
       <h2 className="text-foreground text-5xl font-medium tracking-tight border-b border-primary/50 pb-2 w-full">
         {message.content}
-      </h2> : <div className="w-full text-lg">
-        <Markdown>{message.content}</Markdown>
-      </div>
+      </h2> : <GenerativeMessage message={message.content} />
       }
     </div>
   );
