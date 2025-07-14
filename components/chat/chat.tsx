@@ -4,6 +4,7 @@ import { useChat } from '@ai-sdk/react';
 import ChatMessage from '@/components/chat/chat-message';
 import ChatInput from '@/components/chat/chat-input';
 import { motion } from 'motion/react';
+import Image from 'next/image';
 
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat({});
@@ -12,7 +13,7 @@ export default function Chat() {
     <div className="flex flex-col items-center justify-center h-full w-full gap-4 max-w-2xl mx-auto py-8 relative">
       <div className="flex flex-col w-full relative h-full">
             <div className="flex-1 overflow-y-auto scrollbar-hide">
-              <div className="p-4 px-10">
+              <div className="p-2">
               {messages.length === 0 ? (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -24,10 +25,11 @@ export default function Chat() {
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: 0.3 }}
-                    className="text-6xl font-regular mb-2 tracking-tight"
+                    className="text-8xl font-light mb-6 mr-12 tracking-tight flex flex-row items-center"
                     exit={{ opacity: 0, y: 20 }}
                   >
-                    Ripple Search
+                    <Image src="/logo.png" alt="Ripple" width={120} height={120} className="rounded-full" />
+                    Ripple
                   </motion.h1>
                 </motion.div>
               ) : (
