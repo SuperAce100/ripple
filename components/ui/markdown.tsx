@@ -4,6 +4,8 @@ import { cn } from "@/lib/utils";
 import { CodeBlock, CodeBlockCode } from "@/components/ui/code-block";
 import { JSXPreview } from "@/components/ui/jsx-preview";
 import rehypeRaw from "rehype-raw";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./accordion";
+import { Brain } from "lucide-react";
 
 function extractLanguage(className?: string): string {
   if (!className) return "plaintext"
@@ -87,7 +89,7 @@ const components: Components = {
   },
   td: ({ children }: { children: React.ReactNode }) => {
     return <td className="border border-gray-300 p-2">{children}</td>
-  },
+  }
 }
 
 export default function Markdown({ children, className }: { children: string, className?: string }) {
