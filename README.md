@@ -1,14 +1,11 @@
-# Ripple
+# Ripple Search
 
-<p align="center">
-  <img src="assets/ripple-wide.png" alt="Ripple wide banner" width="100%" />
-</p>
-
-<p align="center">
-  <video src="assets/demo.mp4" controls width="100%"></video>
-</p>
+![Ripple Search](./assets/ripple_wide.png)
 
 Ripple is an adaptive search engine that doesn’t send you links—it instantly assembles the interface you need to answer your question.
+
+
+https://github.com/SuperAce100/ripple/blob/c70e04c811f3be1ecd18c4a2d4dcec69e04bd096/assets/demo.mp4
 
 ## Why Ripple?
 
