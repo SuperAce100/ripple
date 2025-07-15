@@ -30,7 +30,7 @@ export default function Chat() {
                 </motion.div>
               ) : (
                 <div className="flex flex-col gap-4 pb-12 pt-4">
-                  {messages.map((message, index) => (
+                  {messages.map((message) => (
                     <ChatMessage
                       key={message.id}
                       message={message}

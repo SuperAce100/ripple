@@ -1,7 +1,6 @@
 import * as React from "react"
 import JsxParser from "react-jsx-parser"
 import type { TProps as JsxParserProps } from "react-jsx-parser"
-import { cn } from "@/lib/utils"
 import * as Lucide from "lucide-react"
 import * as Shadcn from "@/components/ui"
 
@@ -92,7 +91,8 @@ function JSXPreview({ jsx, isStreaming = false, ...props }: JSXPreviewProps) {
   // Cast JsxParser to any to work around the type incompatibility
   const Parser = JsxParser as unknown as React.ComponentType<JsxParserProps>
 
-  return <Parser components={components} jsx={processedJsx} {...props} className="w-full" />
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return <Parser components={components as any} jsx={processedJsx} {...props} className="w-full" />
 }
 
 export { JSXPreview }

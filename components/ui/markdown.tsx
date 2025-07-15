@@ -1,11 +1,8 @@
-import ReactMarkdown, { Components } from "react-markdown";
+import ReactMarkdown from "react-markdown";
+import type { Components as MarkdownComponents } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { cn } from "@/lib/utils";
 import { CodeBlock, CodeBlockCode } from "@/components/ui/code-block";
-import { JSXPreview } from "@/components/ui/jsx-preview";
-import rehypeRaw from "rehype-raw";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./accordion";
-import { Brain } from "lucide-react";
 
 function extractLanguage(className?: string): string {
   if (!className) return "plaintext"
@@ -14,7 +11,7 @@ function extractLanguage(className?: string): string {
 }
 
 
-const components: Components = {
+const components = {
   a: ({ href, children }: { href: string | undefined, children: React.ReactNode }) => {
     return <a href={href ?? ''} target="_blank" rel="noopener noreferrer" className="text-primary hover:text-primary-600">{children}</a>
   },
@@ -48,10 +45,10 @@ const components: Components = {
   blockquote: ({ children }: { children: React.ReactNode }) => {
     return <blockquote className="text-sm text-muted-foreground border-l-4 border-primary/20 pl-4 py-2 bg-muted/50 rounded-md">{children}</blockquote>
   },
-  code: function CodeComponent({ className, children, ...props }) {
+  code: function CodeComponent({ className, children, ...props }: { className?: string; children: React.ReactNode; node?: { position?: { start?: { line?: number }, end?: { line?: number } } }; [key: string]: unknown }) {
     const isInline =
-      !props.node?.position?.start.line ||
-      props.node?.position?.start.line === props.node?.position?.end.line
+      !props.node?.position?.start?.line ||
+      props.node?.position?.start?.line === props.node?.position?.end?.line
 
     if (isInline) {
       return (
@@ -75,7 +72,7 @@ const components: Components = {
       </CodeBlock>
     )
   },
-  pre: function PreComponent({ children }) {
+  pre: function PreComponent({ children }: { children: React.ReactNode }) {
     return <>{children}</>
   },
   hr: () => {
@@ -95,7 +92,8 @@ const components: Components = {
 export default function Markdown({ children, className }: { children: string, className?: string }) {
   return (
     <div className={cn("w-full", className)}>
-      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>{children}</ReactMarkdown>
+      {/* Casting to the type expected by react-markdown */}
+      <ReactMarkdown remarkPlugins={[remarkGfm]} components={components as unknown as MarkdownComponents}>{children}</ReactMarkdown>
     </div>
   );
 }
