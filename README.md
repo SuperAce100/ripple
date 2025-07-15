@@ -1,8 +1,6 @@
-# Ripple Search
-
 ![Ripple Search](./assets/ripple_wide.png)
 
-Ripple is an adaptive search engine that doesn’t send you links—it instantly assembles the interface you need to answer your question.
+### Ripple is a generative search engine that instantly assembles the optimal interface to answer your question.
 
 https://github.com/user-attachments/assets/5d1abc41-3fdb-4f53-9157-892eabb74b54
 
@@ -18,7 +16,7 @@ Traditional search returns a page of hyperlinks and leaves the heavy lifting to 
 
 ### Cerebras-powered inference
 
-All model inference runs on Cerebras Wafer-Scale hardware, giving Ripple the headroom to generate full UIs in milliseconds.
+All model inference runs on Cerebras hardware, giving Ripple the headroom to generate full UIs in milliseconds.
 
 ## Example use cases
 
