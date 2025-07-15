@@ -4,8 +4,7 @@
 
 Ripple is an adaptive search engine that doesn’t send you links—it instantly assembles the interface you need to answer your question.
 
-
-https://github.com/SuperAce100/ripple/blob/c70e04c811f3be1ecd18c4a2d4dcec69e04bd096/assets/demo.mp4
+https://github.com/user-attachments/assets/5d1abc41-3fdb-4f53-9157-892eabb74b54
 
 ## Why Ripple?
 
