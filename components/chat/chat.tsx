@@ -10,7 +10,7 @@ export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat({});
 
   return (
-    <div className="flex flex-col items-center justify-center h-full w-full gap-4 max-w-2xl mx-auto py-8 relative">
+    <div className="flex flex-col items-center justify-center h-full w-full gap-4 max-w-3xl mx-auto pb-8 relative">
       <div className="flex flex-col w-full relative h-full">
             <div className="flex-1 overflow-y-auto scrollbar-hide">
               <div className="p-2">

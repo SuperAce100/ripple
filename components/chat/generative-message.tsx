@@ -4,6 +4,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Brain } from "lucide-react";
 
 function Thinking({ children }: { children: React.ReactNode }) {
+
+    return <div className="w-full"></div>
+
     return <Accordion type="single" collapsible className="w-full px-4 rounded-2xl border-primary/20 border hover:border-primary/60">
       <AccordionItem
         value="thinking" >

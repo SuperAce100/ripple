@@ -43,7 +43,7 @@ const components: Components = {
     return <li className="mb-2 ml-2">{children}</li>
   },
   img: ({ src, alt }: { src: string, alt: string }) => {
-    return <img src={src} alt={alt} className="w-full max-w-md my-4 float h-auto rounded-md" />
+    return <img src={src} alt={alt} className="w-full max-w-lg my-4 float h-auto rounded-md" />
   },
   blockquote: ({ children }: { children: React.ReactNode }) => {
     return <blockquote className="text-sm text-muted-foreground border-l-4 border-primary/20 pl-4 py-2 bg-muted/50 rounded-md">{children}</blockquote>
