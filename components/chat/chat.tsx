@@ -18,15 +18,11 @@ export default function Chat() {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
+                  transition={{ duration: 0.8, delay: 0.3, ease: "easeInOut" }}
                   className="flex flex-col items-center justify-center h-[calc(100vh-12rem)] text-center"
                 >
                   <motion.h1
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                    className="text-8xl font-light mb-6 mr-12 tracking-tight flex flex-row items-center"
-                    exit={{ opacity: 0, y: 20 }}
+                    className="text-8xl font-light mr-12 tracking-tight flex flex-row items-center"
                   >
                     <Image src="/logo.png" alt="Ripple" width={120} height={120} className="rounded-full" />
                     Ripple
@@ -48,7 +44,7 @@ export default function Chat() {
       <motion.div
               initial={
                 messages.length === 0
-                  ? { y: 'calc(-50vh + 100px)', x: 'calc(30vw)', opacity: 0, width: '40%' }
+                  ? { y: 'calc(-50vh + 100px)', x: 'calc(55vw)', opacity: 0, width: '40%' }
                   : { y: 0, opacity: 0, width: '0%' }
               }
               animate={{
@@ -58,13 +54,11 @@ export default function Chat() {
                 opacity: 1
               }}
               transition={{
-                duration: 0.3,
-                delay: messages.length === 0 ? 0.3 : 0,
-                type: "spring",
-                stiffness: 200,
-                damping: 30,
+                duration: messages.length === 0 ? 0.8 : 0.3,
+                delay: messages.length === 0 ? 0.5 : 0,
+                ease: "easeInOut"
               }}
-              className="absolute bottom-4 left-0 right-0 w-full bg-gradient-to-t from-background to-transparent"
+              className="absolute bottom-4 left-0 right-0 w-full"
             >
         <ChatInput handleSubmit={handleSubmit} input={input} handleInputChange={handleInputChange} placeholder={messages.length === 0 ? 'Ask anything' : 'Ask a follow-up'} />
       </motion.div>
