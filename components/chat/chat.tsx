@@ -9,8 +9,6 @@ import Image from 'next/image';
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat({});
 
-  console.log(messages);
-
   return (
     <div className="flex flex-col items-center justify-center h-full w-full gap-4 max-w-3xl mx-auto pb-8 relative">
       <div className="flex flex-col w-full relative h-full">
