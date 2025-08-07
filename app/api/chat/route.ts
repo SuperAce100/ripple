@@ -1,8 +1,10 @@
 import { cerebras } from '@ai-sdk/cerebras';
-import { smoothStream, streamText } from 'ai';
+import { smoothStream, streamText, tool } from 'ai';
+import Exa from "exa-js";
+import { z } from "zod";
 
-// Allow streaming responses up to 30 seconds
-export const maxDuration = 30;
+const exa = new Exa(process.env.EXA_API_KEY);
+
 
 export async function POST(req: Request) {
   const { messages } = await req.json();
@@ -19,20 +21,35 @@ export async function POST(req: Request) {
   Make sure the components are used correctly according to the documentation. Use Tailwind for column layouts in comparisons.
   Generally, use appropriate padding, margin, and spacing between the components so everything looks seamless. Use the default shadcn colors where possible. Use different background colors like bg-card, bg-muted, and bg-background.
   
-  NEVER include a max width for any component, ALWAYS use w-full. Do not make the layouts responsive, since they need to be consistent. The max width of the layout will be wide enough.
+  NEVER include a max width for any component, ALWAYS use w-full. Do not make the layouts responsive, since they need to be consistent. The max width of the layout will be wide enough.Don't use the calendar component or date picker.
 
-  Use Tailwind to style all text - including list-disc, list-decimal, text-2xl, etc. For lists, make sure to add a list-inside class to the list item. Use Lucide icons for icons!
+  Use Tailwind to style all text - including list-disc, list-decimal, text-2xl, etc. For lists, make sure to add a list-inside class to the list item. Use Lucide icons for icons! 
 
-  Today's date is ${new Date().toLocaleDateString()}.
+  Today's date is ${new Date().toLocaleDateString()}. Use the search tool to get the latest information and then answer the user's query.
   /no_think
   `
 
-
-
   const result = streamText({
     model: cerebras('qwen-3-coder-480b'),
-    system,
+    system: system,
     messages,
+    // maxSteps: 10,
+    // tools: {
+    //   search: tool({
+    //     description: "Search the web for information",
+    //     parameters: z.object({
+    //       query: z.string().describe("The query to search for")
+    //     }),
+    //     execute: async ({ query }) => {
+    //       const searchResult = await exa.searchAndContents(query, {
+    //         text: true,
+    //         type: "fast",
+    //         maxResults: 2,
+    //       });
+    //       return searchResult.results.map((r) => r.text).join("\n").slice(0, 3000);
+    //     }
+    //   })
+    // },
     experimental_transform: smoothStream({
       delayInMs: 3
     })
