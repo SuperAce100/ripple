@@ -1,5 +1,5 @@
 import { cerebras } from '@ai-sdk/cerebras';
-import { streamText } from 'ai';
+import { smoothStream, streamText } from 'ai';
 
 // Allow streaming responses up to 30 seconds
 export const maxDuration = 30;
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
   Use Tailwind for styling and Shadcn UI for pre-built components (<Card>, <Button>, <Input>, etc - use capitalized names for the prebuilt components). You also have Lucide icons at your disposal. Everything is already imported, so do not import anything.
 
   Make sure the components are used correctly according to the documentation. Use Tailwind for column layouts in comparisons.
-  Generally, use appropriate padding, margin, and spacing between the components so everything looks seamless. Use the default shadcn colors where possible.
+  Generally, use appropriate padding, margin, and spacing between the components so everything looks seamless. Use the default shadcn colors where possible. Use different background colors like bg-card, bg-muted, and bg-background.
   
   NEVER include a max width for any component, ALWAYS use w-full. Do not make the layouts responsive, since they need to be consistent. The max width of the layout will be wide enough.
 
@@ -30,11 +30,12 @@ export async function POST(req: Request) {
 
 
   const result = streamText({
-    model: cerebras('qwen-3-235b-a22b'),
+    model: cerebras('qwen-3-coder-480b'),
     system,
     messages,
-    temperature: 0.6,
-    topP: 0.95
+    experimental_transform: smoothStream({
+      delayInMs: 3
+    })
   });
 
   return result.toDataStreamResponse();
