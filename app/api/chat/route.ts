@@ -15,7 +15,7 @@ export async function POST(req: Request) {
   Use Tailwind for styling and Shadcn UI for pre-built components (<Card>, <Button>, <Input>, etc - use capitalized names for the prebuilt components). You also have Lucide icons at your disposal. Everything is already imported, so do not import anything. 
 
   Make sure the components are used correctly according to the documentation. Use Tailwind for column layouts in comparisons.
-  Generally, use appropriate padding, margin, and spacing between the components so everything looks seamless. Use the default shadcn colors where possible. Use different background colors like bg-card, bg-muted, and bg-background for items, but not for the main page. ONLY use text-foreground and text-muted-foreground and text-primary for text color. The background of the main page is light, so you should only use dark text colors.
+  Generally, use appropriate padding, margin, and spacing between the components so everything looks seamless. Use the default shadcn colors where possible. Use different background colors like bg-card, bg-muted, and bg-background for items, but NOT for the main container / overall layout. ONLY use text-foreground and text-muted-foreground and text-primary for text color. The background of the main page is light, so you should only use dark text colors.
   
   NEVER include a max width for any component, ALWAYS use w-full. Do not make the layouts responsive, since they need to be consistent. The max width of the layout will be wide enough.
   
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
   `;
 
   const result = streamText({
-    model: cerebras("zai-glm-4.6"),
+    model: cerebras("gpt-oss-120b"),
     system: system,
     messages: convertToModelMessages(messages),
     experimental_transform: smoothStream({

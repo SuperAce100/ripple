@@ -87,7 +87,14 @@ function JSXPreview({ jsx, isStreaming = false, ...props }: JSXPreviewProps) {
   const Parser = JsxParser as unknown as React.ComponentType<JsxParserProps>;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return <Parser components={components as any} jsx={processedJsx} {...props} className="w-full" />;
+  return (
+    <Parser
+      components={components as any}
+      jsx={processedJsx}
+      {...props}
+      className="w-full [&>div]:bg-transparent"
+    />
+  );
 }
 
 export { JSXPreview };
