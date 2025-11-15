@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 const geistSans = Manrope({
   variable: "--font-geist-sans",
@@ -28,6 +29,7 @@ export default function RootLayout({
         <div className="flex flex-col items-center justify-center h-screen w-screen bg-gradient-to-br from-card to-primary/10">
           {children}
         </div>
+        <Analytics />
       </body>
     </html>
   );
