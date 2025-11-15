@@ -7,6 +7,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import { useMemo, useState } from "react";
 import { useChat } from "@ai-sdk/react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Chat() {
   const [input, setInput] = useState("");
@@ -17,7 +18,7 @@ export default function Chat() {
       }),
     []
   );
-  const { messages, sendMessage } = useChat({
+  const { messages, sendMessage, isLoading } = useChat({
     transport,
   });
 
@@ -63,6 +64,15 @@ export default function Chat() {
                 {messages.map((message) => (
                   <ChatMessage key={message.id} message={message} />
                 ))}
+                {isLoading && (
+                  <div className="w-full text-lg relative flex flex-col gap-4 items-center justify-center">
+                    <div className="w-full flex flex-col gap-3">
+                      <Skeleton className="h-4 w-full" />
+                      <Skeleton className="h-4 w-5/6" />
+                      <Skeleton className="h-4 w-4/6" />
+                    </div>
+                  </div>
+                )}
               </div>
             )}
           </div>
